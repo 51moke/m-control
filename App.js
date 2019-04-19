@@ -8,7 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
-import { SensorManager } from 'NativeModules';
+import { SensorManager, Tcp } from 'NativeModules';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,7 +20,7 @@ const instructions = Platform.select({
 //陀螺仪
 DeviceEventEmitter.addListener('Gyroscope', function (data) {
 
-  console.log('data',data);
+  //console.log('data',data);
   /**
   * data.x
   * data.y
@@ -30,9 +30,16 @@ DeviceEventEmitter.addListener('Gyroscope', function (data) {
 SensorManager.startGyroscope(100);
 //SensorManager.stopGyroscope();
 
+DeviceEventEmitter.addListener('onWifi',(data)=>{
+  console.log('监听到wifi信息',data);
+})
+
 type Props = {};
 export default class App extends Component<Props> {
   render() {
+    Tcp.emit("测试",(msg)=>{
+      alert("异常"+msg);
+    });
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
