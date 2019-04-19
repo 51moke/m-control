@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
 import { SensorManager, Tcp } from 'NativeModules';
+import Orientation from 'react-native-orientation';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -36,6 +37,12 @@ DeviceEventEmitter.addListener('onWifi',(data)=>{
 
 type Props = {};
 export default class App extends Component<Props> {
+
+  componentWillMount() {
+    Orientation.lockToLandscape();  //强行横屏
+    //Orientation.lockToPortrait(); //强行竖屏
+  }
+
   render() {
     Tcp.emit("测试",(msg)=>{
       alert("异常"+msg);
