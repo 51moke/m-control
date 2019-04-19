@@ -7,7 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
+import { SensorManager } from 'NativeModules';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -15,6 +16,19 @@ const instructions = Platform.select({
     'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+
+//陀螺仪
+DeviceEventEmitter.addListener('Gyroscope', function (data) {
+
+  console.log('data',data);
+  /**
+  * data.x
+  * data.y
+  * data.z
+  **/
+});
+SensorManager.startGyroscope(100);
+//SensorManager.stopGyroscope();
 
 type Props = {};
 export default class App extends Component<Props> {
