@@ -11,6 +11,8 @@ import {Platform, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native
 import { SensorManager, Tcp } from 'NativeModules';
 import Orientation from 'react-native-orientation';
 
+import KSYVideo from "./v.js";
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -44,14 +46,12 @@ export default class App extends Component<Props> {
   }
 
   render() {
-    Tcp.emit("测试",(msg)=>{
-      alert("异常"+msg);
-    });
+    // Tcp.emit("测试",(msg)=>{
+    //   alert("异常"+msg);
+    // });
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <KSYVideo />
       </View>
     );
   }
