@@ -36,11 +36,11 @@ public class TcpModule extends ReactContextBaseJavaModule {
     /**
      * 服务端的ip
      */
-    private String mDstName ="192.168.1.102";
+    private String mDstName ="192.168.4.1";
     /**
      * 服务端端口号
      */
-    private int mDesPort = 8000;
+    private int mDesPort = 5000;
 
     public TcpModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -65,25 +65,33 @@ public class TcpModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void emit(String string,Callback cb){
 
-        try {
+        TcpModule mthis = this;
+        new Thread(new Runnable() {
 
-            if (mClient == null) {
-                this.connect();
+            @Override
+            public void run() {
+                try {
+
+                    if (mClient == null) {
+                        mthis.connect();
+                    }
+
+                    //Convert to byte[]
+                    byte[] bytes = string.getBytes();
+
+                    // 把数据写入到OuputStream对象中
+                    client.write(bytes, 0, bytes.length);
+
+                    // 发送读取的数据到服务端
+                    //client.flush();
+                }catch (IOException e){
+                    mClient = null;
+                    Log.d("test",e.getMessage());
+                    cb.invoke(e.getMessage());
+                }
             }
+        }).start();
 
-            //Convert to byte[]
-            byte[] bytes = string.getBytes();
-
-            // 把数据写入到OuputStream对象中
-            client.write(bytes, 0, bytes.length);
-
-            // 发送读取的数据到服务端
-            //client.flush();
-        }catch (IOException e){
-            mClient = null;
-            Log.d("test",e.getMessage());
-            cb.invoke(e.getMessage());
-        }
     }
 
 

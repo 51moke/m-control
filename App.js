@@ -10,13 +10,8 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
 import { SensorManager, Tcp } from 'NativeModules';
 import Orientation from 'react-native-orientation';
+import Car from  './onCar';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 //陀螺仪
 DeviceEventEmitter.addListener('Gyroscope', function (data) {
@@ -44,14 +39,12 @@ export default class App extends Component<Props> {
   }
 
   render() {
-    Tcp.emit("测试",(msg)=>{
-      alert("异常"+msg);
-    });
+    // Tcp.emit("测试",(msg)=>{
+    //   alert("异常"+msg);
+    // });
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Car/>
       </View>
     );
   }
@@ -63,15 +56,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
