@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Tcp } from 'NativeModules';
 
+
 let onObj = {
   emitError(msg) {
     alert('通信异常', msg);
@@ -60,7 +61,7 @@ let onData = {
       onObj.timeout.direction = setInterval(() => {
         console.log("a");
         Tcp.emit("a", onObj.emitError);
-      }, 220);
+      }, 120);
     },
     end() {
       console.log('左拐结束')
@@ -75,7 +76,7 @@ let onData = {
       onObj.timeout.direction = setInterval(() => {
         console.log("d");
         Tcp.emit("d", onObj.emitError);
-      }, 220);
+      }, 120);
     },
     end() {
       console.log('右拐结束')
@@ -171,7 +172,7 @@ export default class onCar extends Component {
           <View
             ref="forward"
             style={{ width: 150, height: 150, backgroundColor: "#ffff00" }}
-          ><Text>前进</Text></View>
+          ><Text>前进2</Text></View>
           <View
             ref="back"
             style={{ width: 150, height: 150, marginTop: 10, backgroundColor: "#ffff00" }}

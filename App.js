@@ -8,27 +8,27 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
-import { SensorManager, Tcp } from 'NativeModules';
+//import { SensorManager, Tcp } from 'NativeModules';
 import Orientation from 'react-native-orientation';
 import Car from  './onCar';
 
 
 //陀螺仪
-DeviceEventEmitter.addListener('Gyroscope', function (data) {
+// DeviceEventEmitter.addListener('Gyroscope', function (data) {
 
-  //console.log('data',data);
-  /**
-  * data.x
-  * data.y
-  * data.z
-  **/
-});
-SensorManager.startGyroscope(100);
+//   //console.log('data',data);
+//   /**
+//   * data.x
+//   * data.y
+//   * data.z
+//   **/
+// });
+// SensorManager.startGyroscope(100);
 //SensorManager.stopGyroscope();
 
-DeviceEventEmitter.addListener('onWifi',(data)=>{
-  console.log('监听到wifi信息',data);
-})
+// DeviceEventEmitter.addListener('onWifi',(data)=>{
+//   console.log('监听到wifi信息',data);
+// })
 
 type Props = {};
 export default class App extends Component<Props> {
