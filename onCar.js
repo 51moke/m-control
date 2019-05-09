@@ -6,7 +6,8 @@ import {
   Text,
   View,
   findNodeHandle,
-  UIManager
+  UIManager,
+  WebView
 } from 'react-native';
 import { Tcp } from 'NativeModules';
 
@@ -165,6 +166,9 @@ export default class onCar extends Component {
           this.onEnd(e.nativeEvent)
         }}
       >
+      <WebView
+        source={{uri: 'http://192.168.4.22:81/stream'}}
+       style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: "#00ff00" }} />
         <View
           style={{ position: "absolute", bottom: 10, left: 20 }}
         >
