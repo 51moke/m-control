@@ -3,10 +3,13 @@ import React, {
 } from 'react';
 
 import {
+  StyleSheet,
   Text,
+  Image,
   View,
   findNodeHandle,
-  UIManager
+  UIManager,
+  Dimensions
 } from 'react-native';
 import { Tcp } from 'NativeModules';
 
@@ -157,7 +160,7 @@ export default class onCar extends Component {
   render() {
     return (
       <View
-        style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: "#00ff00" }}
+        style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
         onTouchStart={(e) => {
           this.setOn(e.nativeEvent);
         }}
@@ -165,55 +168,64 @@ export default class onCar extends Component {
           this.onEnd(e.nativeEvent)
         }}
       >
+        <View>
+          <Image style={[styles.bgImg]} source={
+            require('./img/bg.jpeg')
+          } >
+          </Image>
+        </View>
         <View
-          style={{ position: "absolute", bottom: 10, left: 20 }}
+          style={{ position: "absolute", bottom: 22, left: 94 }}
         >
           <View
             ref="forward"
-            style={{ width: 150, height: 150, backgroundColor: "#ffff00" }}
+            style={[styles.borderR]}
           ><Text>前进</Text></View>
           <View
             ref="back"
-            style={{ width: 150, height: 150, marginTop: 10, backgroundColor: "#ffff00" }}
+            style={[styles.borderR, { marginTop: 35, }]}
           ><Text>后退</Text></View>
         </View>
 
         <View
-          style={{ position: "absolute", top: 50, right: "50%" }}
+          style={{ position: "absolute", bottom: 35, right: "40%", flexDirection: 'row' }}
         >
-          <View
-            ref="level_1"
-            style={{ width: 150, height: 50, backgroundColor: "#ffff00" }}
-          ><Text>一档</Text></View>
-          <View
-            ref="level_2"
-            style={{ width: 150, height: 50, marginTop: 10, backgroundColor: "#ffff00" }}
-          ><Text>二档</Text></View>
-          <View
-            ref="level_3"
-            style={{ width: 150, height: 50, marginTop: 10, backgroundColor: "#ffff00" }}
-          ><Text>三档</Text></View>
-          <View
-            ref="level_4"
-            style={{ width: 150, height: 50, marginTop: 10, backgroundColor: "#ffff00" }}
-          ><Text>四档</Text></View>
-          <View
-            ref="level_5"
-            style={{ width: 150, height: 50, marginTop: 10, backgroundColor: "#ffff00" }}
-          ><Text>五档</Text></View>
+          <View style={{ flexDirection: 'column' ,marginRight:10}}>
+            <View
+              ref="level_1"
+              style={[styles.gearText]}
+            ><Text style={styles.gearFont}>1{/* 一档 */}</Text></View>
+            <View
+              ref="level_2"
+              style={[styles.gearText, { marginTop: 10, }]}
+            ><Text style={styles.gearFont}>2{/* 二档 */}</Text></View>
+          </View>
+          <View style={{ flexDirection: 'column' }}>
+            <View
+              ref="level_3"
+              style={[styles.gearText,{}]}
+            ><Text style={styles.gearFont}>3{/* 三档 */}</Text></View>
+            <View
+              ref="level_4"
+              style={[styles.gearText, { marginTop: 5}]}
+            ><Text style={styles.gearFont}>4{/* 四档 */}</Text></View>
+            <View
+              ref="level_5"
+              style={[styles.gearText, { marginTop: 5, }]}
+            ><Text style={styles.gearFont}>5{/* 五档 */}</Text></View>
+          </View>
         </View>
-
         <View
-          style={{ position: "absolute", bottom: 10, right: 10 }}
+          style={{ position: "absolute", bottom: 61, right: 98 }}
         >
-          <View style={{ width: 310, flex: 1, flexDirection: "row" }}>
+          <View style={{ width: 200, flex: 1, flexDirection: "row" }}>
             <View
               ref="left"
-              style={{ width: 150, height: 150, backgroundColor: "#ffff00", flex: 1, flexDirection: "row" }}
+              style={[styles.borderR]}
             ><Text>向左</Text></View>
             <View
               ref="right"
-              style={{ width: 150, height: 150, marginLeft: 10, backgroundColor: "#ffff00", flex: 1, flexDirection: "row" }}
+              style={[styles.borderR, { marginLeft: 50 }]}
             ><Text>向右</Text></View>
           </View>
         </View>
@@ -222,3 +234,36 @@ export default class onCar extends Component {
   }
 
 };
+const { width, height } = Dimensions.get('window');
+const styles = StyleSheet.create({
+  borderR: {
+    width: 78,
+    height: 78,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#333',
+    flex: 1,
+    flexDirection: 'row',
+    borderRadius: 100,
+    opacity: 0
+  },
+  gearText: {
+    fontSize: 20,
+    color: '#F00',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    height: 60,
+    backgroundColor: "#333",
+    borderRadius: 100,
+    opacity: 0.5
+  },
+  gearFont: {
+    fontSize: 20,
+    color: '#FFF'
+  },
+  bgImg: {
+    width: width,
+    height: height
+  }
+})
